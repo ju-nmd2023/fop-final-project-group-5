@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 277 137">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: Krungthep, Krungthep;
+        font-size: 43px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <ellipse class="cls-2" cx="161.5" cy="64" rx="114" ry="62.5"/>
+    <ellipse class="cls-2" cx="22" cy="122.5" rx="20.5" ry="13"/>
+    <text class="cls-1" transform="translate(112.33 55.25)"><tspan x="0" y="0">Lets </tspan><tspan x="-7.14" y="51.6">bake</tspan></text>
+  </g>
+</svg>
