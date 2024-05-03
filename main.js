@@ -1,9 +1,13 @@
 /*let image;
 let starttext;*/
 
+let x = 0;
+
 function setup() {
   createCanvas(1000, 800);
-  startscreen();
+  stroke(255);
+  frameRate(50);
+  noLoop();
 }
 
 function preload() {
@@ -18,18 +22,20 @@ function startscreen() {
   image(img, 0, 0);
   image(starttext, 0, height / 9);
 
-  /*image(img, 0, 0, 600, 300);*/
+  image(img, 0, 0, 600, 300);
 
-  /*let buttonStart = createImg("image/startbutton.png");
+  let buttonStart = createImg("image/startbutton.png");
   buttonStart.position(10, 10);
-  buttonStart.mouseClicked(imageButtonClicked);*/
+  buttonStart.mouseClicked(imageButtonClicked);
 }
 
-/*function imageButtonClicked() {
+function imageButtonClicked() {
   alert("image button clicked");
-}*/
+}
 
-function gamnescreen() {}
+function gamescreen() {
+  image(game, 0, 0);
+}
 
 function gameover() {
   image(gameoverbackground, 0, 0);
@@ -39,5 +45,14 @@ function gameover() {
 function winner() {}
 
 function draw() {
-  image(gamescreen, 0, 0);
+  background(0);
+  x = x - 1;
+  if (x < 1) {
+    x = width;
+  }
+  line(x, 0, x, x);
+}
+
+function mousePressed() {
+  loop();
 }
