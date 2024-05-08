@@ -18,8 +18,8 @@ function setup() {
   stroke(255);
   frameRate(400);
 
-let hatX = width / 4;
-let hatY = height / 1.7 + velocity;
+  let hatX = width / 4;
+  let hatY = height / 1.7 + velocity;
 }
 
 function preload() {
@@ -52,7 +52,6 @@ function imageButtonClicked() {
 function game() {
   background(0);
 
-  
   x = x - transitionSpeed;
 
   image(gameScreen, x, 4, 1000, 750);
@@ -70,7 +69,6 @@ function game() {
   if (keyIsDown(38)) {
     velocity = velocity - 0.2;
   }
-
 }
 function mousePressed() {
   loop();
@@ -89,29 +87,26 @@ function draw() {
 
   fill(255);
 
+  // if (state === "start") {
+  //   startscreen();
+  // } else if (state === "game") {
+  //  game();
+  // } else if (state === "result") {
+  //    gameover();
+  //  }
 
-// if (state === "start") {
-//   startscreen();
-// } else if (state === "game") {
-//  game();
-// } else if (state === "result") {
-//    gameover();
-//  }
+  // if (gameIsRunning === true) {
+  //    gamehat = gamehat + velocity;
+  //    velocity = velocity + acceleration;
+  //  }
 
-// if (gameIsRunning === true) {
-//    gamehat = gamehat + velocity;
-//    velocity = velocity + acceleration;
-//  }
+  //  if (gamehat > 120) {
+  //    gameIsRunning = false;
+  //   if (velocity <= 0.5) {
+  //      state = "result";
+  //    } else {
+  //      gameover();
+  //    }
 
-//  if (gamehat > 120) {
-//    gameIsRunning = false;
-//   if (velocity <= 0.5) {
-//      state = "result";
-//    } else {
-//      gameover();
-//    }
-
-//  }
-
+  //  }
 }
-
