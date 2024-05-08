@@ -6,11 +6,6 @@ let gameScreen2;
 let gameScreen3;
 let x = 0;
 let transitionSpeed = 5;
-let player;
-let gravity = 0.6;
-let jumpForce = -12;
-let isJumpinmg = false;
-
 
 function setup() {
   createCanvas(1000, 800);
@@ -28,13 +23,6 @@ function preload() {
   gameScreen3 = loadImage("image/game.png");
 }
 
-player = {
-  width: 50,
-  height: 50,
-  velocityY: 0
-};
-
-
 function startscreen() {
   image(img, 0, 0);
   image(starttext, 0, height / 9);
@@ -51,21 +39,19 @@ function imageButtonClicked() {
 }
 
 function game() {
-background(0);
+  background(0);
   x = x - transitionSpeed;
 
   image(gameScreen, x, 4, 1000, 750);
 
   image(gameScreen2, x + gameScreen.width - 400, 4, 1000, 750);
 
-  image(gameScreen3, x + (2 * (gameScreen.width - 400)), 4, 1000, 750);
+  image(gameScreen3, x + 2 * (gameScreen.width - 400), 4, 1000, 750);
 
-    if (x <= -gameScreen.width) {
+  if (x <= -gameScreen.width) {
     x = 0;
   }
-
-}  
-  
+}
 
 function mousePressed() {
   loop();
@@ -79,28 +65,8 @@ function gameover() {
 function winner() {}
 
 function draw() {
-game();
+  startscreen();
+  game();
 
-fill(255);
-rect(player.x, player.y, player.width, player.height);
-
-
-player.velocityY += gravity;
-  player.y += player.velocityY;
-
-  if (player.y >= height - player.height) {
-    player.y = height - player.height;
-    player.velocityY = 0;
-    isJumping = false;
-  }
-
-  if (keyIsPressed && !isJumping && keyCode === UP_ARROW) {
-    player.velocityY = jumpForce;
-    isJumping = true;
-  }
-
-  if (x <= -gameScreen.width) {
-    x = 0;
-  }
+  fill(255);
 }
-  
