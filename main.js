@@ -75,8 +75,8 @@ function draw() {
 
   fill(255);
 
-  if (gameIsRunning === true) {
-    
-  }
+  // if (gameIsRunning === true) {
+
+  // }
 }
 
