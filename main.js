@@ -18,8 +18,8 @@ function setup() {
   stroke(255);
   frameRate(400);
 
-let hatX = width / 4;
-let hatY = height / 1.7 + velocity;
+ hatX = width / 4;
+ hatY = height / 1.7 + velocity;
 }
 
 function preload() {
@@ -61,7 +61,8 @@ function game() {
 
   image(gameScreen3, x + 2 * (gameScreen.width - 400), 4, 1000, 750);
 
-  image(gamehat, width / 4, height / 1.7, 200, 140);
+  // hatY += velocity;
+  image(gamehat, hatX, hatY, 200, 140);
 
   if (x <= -gameScreen.width) {
     x = 0;
@@ -78,7 +79,7 @@ function mousePressed() {
 
 function gameover() {
   image(gameoverbackground, 0, 0);
-  image(sadboy, width / 6, height / 9);
+  image(sadboy);
 }
 
 function winner() {}
@@ -98,10 +99,10 @@ function draw() {
 //    gameover();
 //  }
 
-// if (gameIsRunning === true) {
-//    gamehat = gamehat + velocity;
-//    velocity = velocity + acceleration;
-//  }
+if (gameIsRunning === true) {
+   gamehat = gamehat + velocity;
+velocity = velocity + acceleration;
+}
 
 //  if (gamehat > 120) {
 //    gameIsRunning = false;
