@@ -10,7 +10,7 @@ let transitionSpeed = 5;
 function setup() {
   createCanvas(1000, 800);
   stroke(255);
-  frameRate(300);
+  frameRate(400);
 }
 
 function preload() {
@@ -52,7 +52,6 @@ function game() {
     x = 0;
   }
 }
-
 function mousePressed() {
   loop();
 }
