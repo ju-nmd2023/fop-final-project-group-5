@@ -6,6 +6,8 @@ let gameScreen2;
 let gameScreen3;
 let x = 0;
 let transitionSpeed = 5;
+let velocity = 0.2;
+const acceleration = 0.1;
 
 function setup() {
   createCanvas(1000, 800);
@@ -51,6 +53,10 @@ function game() {
   if (x <= -gameScreen.width) {
     x = 0;
   }
+
+  if (keyIsDown(38)) {
+    velocity = velocity - 0.2;
+  }
 }
 function mousePressed() {
   loop();
@@ -68,4 +74,9 @@ function draw() {
   game();
 
   fill(255);
+
+  if (gameIsRunning === true) {
+    
+  }
 }
+
