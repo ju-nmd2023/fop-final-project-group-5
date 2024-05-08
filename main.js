@@ -2,13 +2,14 @@
 let starttext;*/
 
 let gameScreen;
+let gameScreen2;
 let x = 0;
+let transitionSpeed = 2;
 
 function setup() {
   createCanvas(1000, 800);
   stroke(255);
   frameRate(100);
-  noLoop();
 }
 
 function preload() {
@@ -17,6 +18,8 @@ function preload() {
   gameoverbackground = loadImage("image/gameoverbackground.png");
   sadboy = loadImage("image/sadboy.png");
   gameScreen = loadImage("image/game.png");
+  gameScreen2 = loadImage("image/game.png");
+  gameScreen3 = loadImage("image/game.png");
 }
 /*
 function startscreen() {
@@ -47,11 +50,17 @@ function winner() {}*/
 
 function draw() {
   background(0);
-  x = x - 1;
-  if (x < -gameScreen.width) {
-    x = width;
+  x = x - transitionSpeed;
+
+  image(gameScreen, x, 4, 1000, 750);
+
+  image(gameScreen2, x + gameScreen.width - 420, 4, 1000, 750);
+
+  image(gameScreen3, x + gameScreen.width - 420, 4, 1000, 750);
+
+  if (x <= -gameScreen.width) {
+    x = 0;
   }
-  image(gameScreen, x, 4, 700, 800);
 }
 
 function mousePressed() {
