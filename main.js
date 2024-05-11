@@ -6,7 +6,7 @@ let gameScreen2;
 let gameScreen3;
 let x = 0;
 let transitionSpeed = 5;
-let velocity = 0.2;
+let velocity = 0.3;
 const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
