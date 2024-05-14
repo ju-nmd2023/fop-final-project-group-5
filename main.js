@@ -12,11 +12,19 @@ let gameIsRunning = false;
 let state = "start";
 let hatX;
 let hatY;
+let disk1X, disk1Y, disk2X, disk2Y, disk3X, disk3Y;
 
 function setup() {
   createCanvas(1000, 800);
   stroke(255);
   frameRate(400);
+
+  disk1X = 500;
+  disk1Y = 450;
+  disk2X = 800;
+  disk2Y = 500;
+  disk3X = 250;
+  disk3Y = 400;
 
  hatX = width / 4;
  hatY = height / 1.7 + velocity;
@@ -32,6 +40,9 @@ function preload() {
   gameScreen2 = loadImage("image/game.png");
   gameScreen3 = loadImage("image/game.png");
   startbutton = loadImage("image/startbutton.png");
+  disk1 = loadImage("image/disk1.png");
+  disk2 = loadImage("image/disk2.png");
+  disk3 = loadImage("image/disk3.png");
 }
 
 function startscreen() {
@@ -61,8 +72,26 @@ function game() {
 
   image(gameScreen3, x + 2 * (gameScreen.width - 400), 4, 1000, 750);
 
-  // hatY += velocity;
+  hatY += velocity;
   image(gamehat, hatX, hatY, 200, 140);
+
+  disk1X -= transitionSpeed;
+  disk2X -= transitionSpeed;
+  disk3X -= transitionSpeed;
+
+  image(disk1, disk1X, disk1Y, 150, 100);
+  image(disk2, disk2X, disk2Y, 150, 100);
+  image(disk3, disk3X, disk3Y, 100, 200);
+
+  if (disk1X <= -150) {
+    disk1X = 1000;
+  }
+  if (disk2X <= -150) {
+    disk2X = 1000;
+  }
+  if (disk3X <= -100) {
+    disk3X = 1000;
+  }
 
   if (x <= -gameScreen.width) {
     x = 0;
@@ -70,8 +99,8 @@ function game() {
 
   if (keyIsDown(38)) {
     velocity = velocity - 0.2;
-  }
-
+  } 
+  
 }
 function mousePressed() {
   loop();
@@ -89,7 +118,7 @@ function draw() {
   game();
 
   fill(255);
-
+  
 
 // if (state === "start") {
 //   startscreen();
