@@ -6,7 +6,7 @@ let gameScreen2;
 let gameScreen3;
 let x = 0;
 let transitionSpeed = 5;
-let velocity = 0.3;
+let velocity = 0;
 const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
@@ -37,9 +37,9 @@ function preload() {
 function startscreen() {
   image(img, 0, 0);
   image(starttext, 0, height / 9);
-
+  
   image(img, 0, 0, 600, 300);
-
+  
   let buttonStart = createImg("image/startbutton.png");
   buttonStart.position(100, 100);
   buttonStart.mouseClicked(imageButtonClicked);
@@ -51,7 +51,7 @@ function imageButtonClicked() {
 
 function game() {
   background(0);
-
+  
   
   x = x - transitionSpeed;
 
@@ -99,10 +99,11 @@ function draw() {
 //    gameover();
 //  }
 
-if (gameIsRunning === true) {
-   gamehat = gamehat + velocity;
+if (state) {
+   hatY = hatY + velocity;
 velocity = velocity + acceleration;
 }
+
 
 //  if (gamehat > 120) {
 //    gameIsRunning = false;
