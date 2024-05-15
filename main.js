@@ -10,8 +10,7 @@ let velocity = 0;
 const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
-let hatX;
-let hatY;
+let hat = new Hat(width / 4, height / 1.7, 200, 140);
 let disk1X, disk1Y, disk2X, disk2Y, disk3X, disk3Y;
 let mjölX, mjölY;
 let mjölkX, mjölkY;
@@ -49,7 +48,7 @@ function preload() {
   starttext = loadImage("image/starttext.png");
   gameoverbackground = loadImage("image/gameoverbackground.png");
   sadboy = loadImage("image/sadboy.png");
-  gamehat = loadImage("image/gamehat.png");
+  Hat = loadImage("image/gamehat.png");
   gameScreen = loadImage("image/game.png");
   gameScreen2 = loadImage("image/game.png");
   gameScreen3 = loadImage("image/game.png");
@@ -87,9 +86,6 @@ function game() {
   image(gameScreen2, x + gameScreen.width - 400, 4, 1000, 750);
 
   image(gameScreen3, x + 2 * (gameScreen.width - 400), 4, 1000, 750);
-
-  hatY += velocity;
-  image(gamehat, hatX, hatY, hatWidth, hatHeight);
 
   disk1X -= transitionSpeed;
   disk2X -= transitionSpeed;
@@ -131,16 +127,11 @@ function game() {
     x = 0;
   }
 
-  
-  if (keyIsDown(38)) {
-  
-   velocity = velocity - 0.2;
-    
+  // if (keyIsDown(38)) {
 
+  //  velocity = velocity - 0.2;
 
-  } 
- 
-  
+  // }
 }
 
 // function diskCollision(gamehat, disk1, disk2, disk3) {
@@ -166,6 +157,7 @@ function winner() {}
 function draw() {
   startscreen();
   game();
+  hat.display();
 
   fill(255);
 
@@ -174,10 +166,10 @@ function draw() {
   //    velocity = velocity + acceleration;
   //  }
 
-  if (state) {
-    hatY = hatY + velocity;
-    velocity = velocity + acceleration;
-  }
+  // if (state) {
+  //   hatY = hatY + velocity;
+  //   velocity = velocity + acceleration;
+  // }
 
   //  if (gamehat > 120) {
   //    gameIsRunning = false;
@@ -190,4 +182,20 @@ function draw() {
   //  }
 
   //  }
+}
+
+class Hat {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
+  display() {
+    image(gamehat, this.x, this.y, this.width, this.height);
+  }
+
+  moveUp() {
+    this.y += velocity;
+  }
 }
