@@ -5,7 +5,7 @@ let gameScreen;
 let gameScreen2;
 let gameScreen3;
 let x = 0;
-let transitionSpeed = 5;
+let transitionSpeed = 7;
 let velocity = 0;
 const acceleration = 0.1;
 let gameIsRunning = false;
@@ -20,7 +20,7 @@ let kanelstångX, kanelstångY;
 function setup() {
   createCanvas(1000, 800);
   stroke(255);
-  frameRate(400);
+  // frameRate(400);
 
   disk1X = 500;
   disk1Y = 450;
@@ -133,9 +133,15 @@ function game() {
     x = 0;
   }
 
+  
   if (keyIsDown(38)) {
-    velocity = velocity - 0.2;
+  
+   velocity = velocity - 0.2;
+    
+
+
   } 
+ 
   
 }
 
