@@ -24,6 +24,8 @@ function setup() {
 
   disk1X = 500;
   disk1Y = 450;
+  disk1Width = 150;
+  disk1Height = 100;
   disk2X = 800;
   disk2Y = 500;
   disk3X = 250;
@@ -36,6 +38,9 @@ function setup() {
   kanelstångX = 650;
   kanelstångY = 430;
 
+
+hatWidth = 200;
+hatHeight = 140;
  hatX = width / 4;
  hatY = height / 1.7 + velocity;
 }
@@ -86,13 +91,13 @@ function game() {
   image(gameScreen3, x + 2 * (gameScreen.width - 400), 4, 1000, 750);
 
   hatY += velocity;
-  image(gamehat, hatX, hatY, 200, 140);
+  image(gamehat, hatX, hatY, hatWidth, hatHeight);
 
   disk1X -= transitionSpeed;
   disk2X -= transitionSpeed;
   disk3X -= transitionSpeed;
 
-  image(disk1, disk1X, disk1Y, 150, 100);
+  image(disk1, disk1X, disk1Y, disk1Width, disk1Height);
   image(disk2, disk2X, disk2Y, 150, 100);
   image(disk3, disk3X, disk3Y, 100, 200);
 
@@ -133,6 +138,16 @@ function game() {
   } 
   
 }
+
+// function diskCollision(gamehat, disk1, disk2, disk3) {
+//  if ( hatX + hatWidth >= disk1X &&
+//   hatX <= disk1X + disk1Width &&
+//   hatY + hatWidth >= disk1Y &&
+//   hatY <= disk1Y + disk1Height
+// )
+// return true
+//  }
+
 function mousePressed() {
   loop();
 }
