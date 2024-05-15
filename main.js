@@ -13,6 +13,9 @@ let state = "start";
 let hatX;
 let hatY;
 let disk1X, disk1Y, disk2X, disk2Y, disk3X, disk3Y;
+let mjölX, mjölY;
+let mjölkX, mjölkY;
+let kanelstångX, kanelstångY;
 
 function setup() {
   createCanvas(1000, 800);
@@ -25,6 +28,13 @@ function setup() {
   disk2Y = 500;
   disk3X = 250;
   disk3Y = 400;
+
+  mjölX = 200;
+  mjölY = 400;
+  mjölkX = 50;
+  mjölkY = 450;
+  kanelstångX = 650;
+  kanelstångY = 430;
 
  hatX = width / 4;
  hatY = height / 1.7 + velocity;
@@ -43,6 +53,9 @@ function preload() {
   disk1 = loadImage("image/disk1.png");
   disk2 = loadImage("image/disk2.png");
   disk3 = loadImage("image/disk3.png");
+  mjöl = loadImage("image/mjöl.png");
+  mjölk = loadImage("image/mjölk.png");
+  kanelstång = loadImage("image/kanelstång.png");
 }
 
 function startscreen() {
@@ -91,6 +104,24 @@ function game() {
   }
   if (disk3X <= -100) {
     disk3X = 1000;
+  }
+
+  mjölX -= transitionSpeed;
+  mjölkX -= transitionSpeed;
+  kanelstångX -= transitionSpeed;
+  
+  image(mjöl, mjölX, mjölY, 170, 140);
+  image(mjölk, mjölkX, mjölkY, 100, 160);
+  image(kanelstång, kanelstångX, kanelstångY, 100, 120 );
+
+  if (mjölX <= -150) {
+    mjölX = 1000;
+  }
+  if (mjölkX <= -150) {
+    mjölkX = 1000;
+  } 
+  if (kanelstångX <= -100) {
+    kanelstångX = 1000;
   }
 
   if (x <= -gameScreen.width) {
