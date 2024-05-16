@@ -10,7 +10,7 @@ let velocity = 0;
 const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
-let hat = new Hat(width / 4, height / 1.7, 200, 140);
+let hat;
 let disk1X, disk1Y, disk2X, disk2Y, disk3X, disk3Y;
 let mjölX, mjölY;
 let mjölkX, mjölkY;
@@ -20,7 +20,7 @@ function setup() {
   createCanvas(1000, 800);
   stroke(255);
   // frameRate(400);
-
+  hat = new Hat(width / 4, height / 1.7, 200, 140);
   disk1X = 500;
   disk1Y = 450;
   disk1Width = 150;
@@ -48,7 +48,7 @@ function preload() {
   starttext = loadImage("image/starttext.png");
   gameoverbackground = loadImage("image/gameoverbackground.png");
   sadboy = loadImage("image/sadboy.png");
-  Hat = loadImage("image/gamehat.png");
+  gamehat = loadImage("image/gamehat.png");
   gameScreen = loadImage("image/game.png");
   gameScreen2 = loadImage("image/game.png");
   gameScreen3 = loadImage("image/game.png");
