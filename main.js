@@ -5,8 +5,8 @@ let gameScreen;
 let gameScreen2;
 let gameScreen3;
 let x = 0;
-let transitionSpeed = 7;
-let velocity = 0;
+let x2;
+let transitionSpeed = 5;
 const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
@@ -19,8 +19,9 @@ let kanelstångX, kanelstångY;
 function setup() {
   createCanvas(1000, 800);
   stroke(255);
-  // frameRate(400);
+  //frameRate(60);
   hat = new Hat(width / 4, height / 1.7, 200, 140);
+  x2 = 1000;
   disk1X = 500;
   disk1Y = 450;
   disk1Width = 150;
@@ -40,7 +41,7 @@ function setup() {
   hatWidth = 200;
   hatHeight = 140;
   hatX = width / 4;
-  hatY = height / 1.7 + velocity;
+  hatY = height / 1.7;
 }
 
 function preload() {
@@ -51,7 +52,6 @@ function preload() {
   gamehat = loadImage("image/gamehat.png");
   gameScreen = loadImage("image/game.png");
   gameScreen2 = loadImage("image/game.png");
-  gameScreen3 = loadImage("image/game.png");
   startbutton = loadImage("image/startbutton.png");
   disk1 = loadImage("image/disk1.png");
   disk2 = loadImage("image/disk2.png");
@@ -65,10 +65,10 @@ function startscreen() {
   image(img, 0, 0);
   image(starttext, 0, height / 9);
 
-  image(img, 0, 0, 600, 300);
+  //image(img, 0, 0, 600, 300);
 
   let buttonStart = createImg("image/startbutton.png");
-  buttonStart.position(100, 100);
+  buttonStart.position(350, 600);
   buttonStart.mouseClicked(imageButtonClicked);
 }
 
@@ -80,12 +80,16 @@ function game() {
   background(0);
 
   x = x - transitionSpeed;
+  x2 = x2 - transitionSpeed;
 
-  image(gameScreen, x, 4, 1000, 750);
+  image(gameScreen, x, 4, 1001, 750);
+  image(gameScreen, x2, 4, 1001, 750);
 
-  image(gameScreen2, x + gameScreen.width - 400, 4, 1000, 750);
-
-  image(gameScreen3, x + 2 * (gameScreen.width - 400), 4, 1000, 750);
+  if (x <= -1000) {
+    x = 1000;
+  } else if (x2 <= -1000) {
+    x2 = 1000;
+  }
 
   disk1X -= transitionSpeed;
   disk2X -= transitionSpeed;
@@ -126,12 +130,6 @@ function game() {
   if (x <= -gameScreen.width) {
     x = 0;
   }
-
-  // if (keyIsDown(38)) {
-
-  //  velocity = velocity - 0.2;
-
-  // }
 }
 
 // function diskCollision(gamehat, disk1, disk2, disk3) {
@@ -155,7 +153,8 @@ function gameover() {
 function winner() {}
 
 function draw() {
-  startscreen();
+  clear();
+  //startscreen();
   game();
   hat.display();
 
@@ -190,12 +189,25 @@ class Hat {
     this.y = y;
     this.width = width;
     this.height = height;
+    this.velocity = 0;
   }
+
   display() {
     image(gamehat, this.x, this.y, this.width, this.height);
+    if (keyIsDown(38)) {
+      this.moveUp();
+    } else {
+      this.moveDown();
+    }
   }
 
   moveUp() {
-    this.y += velocity;
+    this.velocity -= 0.2;
+    this.y += this.velocity;
+  }
+
+  moveDown() {
+    this.velocity += 0.2;
+    this.y += this.velocity;
   }
 }
