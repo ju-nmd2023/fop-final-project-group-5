@@ -28,6 +28,8 @@ function setup() {
   disk1Height = 100;
   disk2X = 800;
   disk2Y = 500;
+  disk2Width = 150;
+  disk2Height = 200;
   disk3X = 250;
   disk3Y = 400;
 
@@ -96,7 +98,7 @@ function game() {
   disk3X -= transitionSpeed;
 
   image(disk1, disk1X, disk1Y, disk1Width, disk1Height);
-  image(disk2, disk2X, disk2Y, 150, 100);
+  image(disk2, disk2X, disk2Y, disk2Width, disk2Height);
   image(disk3, disk3X, disk3Y, 100, 200);
 
   if (disk1X <= -150) {
@@ -126,20 +128,33 @@ function game() {
   if (kanelstångX <= -100) {
     kanelstångX = 1000;
   }
+  if (
+diskCollision(hat, disk1X, disk1Y, disk1Width, disk1Height) ||
+diskCollision(hat, disk2X, disk2Y, disk2Width, disk2Height) ||
+diskCollision(hat, disk3X, disk3Y, 100, 200)
+  ) {
+    gameover();
+    noLoop();
+  }
+
+  hat.display();
 
   if (x <= -gameScreen.width) {
     x = 0;
   }
 }
 
-// function diskCollision(gamehat, disk1, disk2, disk3) {
-//  if ( hatX + hatWidth >= disk1X &&
-//   hatX <= disk1X + disk1Width &&
-//   hatY + hatWidth >= disk1Y &&
-//   hatY <= disk1Y + disk1Height
-// )
-// return true
-//  }
+ function diskCollision() {
+  if ( hat.x + hat.width >= disk1X &&
+   hat.x <= disk1X + disk1Width &&
+   hat.y + hat.height >= disk1Y &&
+   hat.y <= disk1Y + disk1Height) 
+     {
+      return true;
+     }
+     return false; 
+     }
+ 
 
 function mousePressed() {
   loop();
@@ -147,7 +162,7 @@ function mousePressed() {
 
 function gameover() {
   image(gameoverbackground, 0, 0);
-  image(sadboy);
+  image(sadboy, width / 2 - sadboy.width / 2, height / 2 - sadboy.height / 2);
 }
 
 function winner() {}
@@ -211,3 +226,16 @@ class Hat {
     this.y += this.velocity;
   }
 }
+
+// if ( hat.x + hat.width >= disk2X &&
+//   hat.x <= disk2X + disk2Width &&
+//   hat.y + hat.height >= disk2Y &&
+//   hat.y <= disk2Y + disk2Height
+//   )
+
+
+
+
+
+
+
