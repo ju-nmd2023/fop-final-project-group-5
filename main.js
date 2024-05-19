@@ -44,6 +44,10 @@ function setup() {
   hatHeight = 140;
   hatX = width / 4;
   hatY = height / 1.7;
+
+  if (state === "start") {
+    noLoop();
+  }
 }
 
 function preload() {
@@ -64,15 +68,20 @@ function preload() {
 }
 
 function startscreen() {
-  image(img, 0, 0);
+  image(img, 0, 0, 600, 300);
   image(starttext, 0, height / 9);
 
   //image(img, 0, 0, 600, 300);
 
   let buttonStart = createImg("image/startbutton.png");
   buttonStart.position(350, 600);
-  buttonStart.mouseClicked(imageButtonClicked);
+  buttonStart.mouseClicked(game);
 }
+
+//  function startGame() {
+//    state = "game";
+//    loop();
+//  }
 
 function imageButtonClicked() {
   alert("image button clicked");
@@ -161,6 +170,8 @@ function mousePressed() {
 }
 
 function gameover() {
+  state = "gameover";
+  noLoop();
   image(gameoverbackground, 0, 0);
   image(sadboy, width / 2 - sadboy.width / 2, height / 2 - sadboy.height / 2);
 }
@@ -169,7 +180,15 @@ function winner() {}
 
 function draw() {
   clear();
-  //startscreen();
+ if (state === "start") {
+  startscreen();
+//  } else if (state === "game") {
+//   game(); 
+//   hat.display();
+//  } else if (state === "gameover") {
+//   image(gameoverbackground, 0, 0);
+//   image(sadboy, width / 2 - sadboy.width / 2, height / 2 - sadboy.height / 2);
+  }
   game();
   hat.display();
 
