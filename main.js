@@ -68,10 +68,8 @@ function preload() {
 }
 
 function startscreen() {
-  image(img, 0, 0, 600, 300);
+  image(img, 0, 0, 1500, 800);
   image(starttext, 0, height / 9);
-
-  //image(img, 0, 0, 600, 300);
 
   let buttonStart = createImg("image/startbutton.png");
   buttonStart.position(350, 600);
@@ -89,6 +87,7 @@ function imageButtonClicked() {
 
 function game() {
   background(0);
+  loop();
 
   x = x - transitionSpeed;
   x2 = x2 - transitionSpeed;
@@ -138,9 +137,9 @@ function game() {
     kanelstångX = 1000;
   }
   if (
-diskCollision(hat, disk1X, disk1Y, disk1Width, disk1Height) ||
-diskCollision(hat, disk2X, disk2Y, disk2Width, disk2Height) ||
-diskCollision(hat, disk3X, disk3Y, 100, 200)
+    diskCollision(hat, disk1X, disk1Y, disk1Width, disk1Height) ||
+    diskCollision(hat, disk2X, disk2Y, disk2Width, disk2Height) ||
+    diskCollision(hat, disk3X, disk3Y, 100, 200)
   ) {
     gameover();
     noLoop();
@@ -153,20 +152,16 @@ diskCollision(hat, disk3X, disk3Y, 100, 200)
   }
 }
 
- function diskCollision() {
-  if ( hat.x + hat.width >= disk1X &&
-   hat.x <= disk1X + disk1Width &&
-   hat.y + hat.height >= disk1Y &&
-   hat.y <= disk1Y + disk1Height) 
-     {
-      return true;
-     }
-     return false; 
-     }
- 
-
-function mousePressed() {
-  loop();
+function diskCollision() {
+  if (
+    hat.x + hat.width >= disk1X &&
+    hat.x <= disk1X + disk1Width &&
+    hat.y + hat.height >= disk1Y &&
+    hat.y <= disk1Y + disk1Height
+  ) {
+    return true;
+  }
+  return false;
 }
 
 function gameover() {
@@ -180,42 +175,47 @@ function winner() {}
 
 function draw() {
   clear();
- if (state === "start") {
-  startscreen();
+
+  if (state === "start") {
+    startscreen();
+    noLoop();
+  } else if (state === "game") {
+    game();
+    hat.display();
+  } else if (state === "gameover") {
+    gameover();
+  }
+}
 //  } else if (state === "game") {
-//   game(); 
+//   game();
 //   hat.display();
 //  } else if (state === "gameover") {
 //   image(gameoverbackground, 0, 0);
 //   image(sadboy, width / 2 - sadboy.width / 2, height / 2 - sadboy.height / 2);
-  }
-  game();
-  hat.display();
 
-  fill(255);
+//  fill(255);
 
-  // if (gameIsRunning === true) {
-  //    gamehat = gamehat + velocity;
-  //    velocity = velocity + acceleration;
-  //  }
+// if (gameIsRunning === true) {
+//    gamehat = gamehat + velocity;
+//    velocity = velocity + acceleration;
+//  }
 
-  // if (state) {
-  //   hatY = hatY + velocity;
-  //   velocity = velocity + acceleration;
-  // }
+// if (state) {
+//   hatY = hatY + velocity;
+//   velocity = velocity + acceleration;
+// }
 
-  //  if (gamehat > 120) {
-  //    gameIsRunning = false;
-  //   if (velocity <= 0.5) {
-  //      state = "result";
-  //    } else {
-  //      gameover();
-  //    }
+//  if (gamehat > 120) {
+//    gameIsRunning = false;
+//   if (velocity <= 0.5) {
+//      state = "result";
+//    } else {
+//      gameover();
+//    }
 
-  //  }
+//  }
 
-  //  }
-}
+//  }
 
 class Hat {
   constructor(x, y, width, height) {
@@ -233,6 +233,7 @@ class Hat {
     } else {
       this.moveDown();
     }
+    this.y = constrain(this.y, 0, height - this.height);
   }
 
   moveUp() {
@@ -251,10 +252,3 @@ class Hat {
 //   hat.y + hat.height >= disk2Y &&
 //   hat.y <= disk2Y + disk2Height
 //   )
-
-
-
-
-
-
-
