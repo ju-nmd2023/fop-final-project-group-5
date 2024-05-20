@@ -6,7 +6,7 @@ let gameScreen2;
 let gameScreen3;
 let x = 0;
 let x2;
-let transitionSpeed = 5;
+let transitionSpeed = 1;
 const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
@@ -15,12 +15,21 @@ let disk1X, disk1Y, disk2X, disk2Y, disk3X, disk3Y;
 let mjölX, mjölY;
 let mjölkX, mjölkY;
 let kanelstångX, kanelstångY;
+let buttonStart;
+let buttonBake;
+let disk = [];
+let disk123;
+let diskimg;
+let disk1, disk2, disk3;
 
 function setup() {
   createCanvas(1000, 800);
   stroke(255);
   //frameRate(60);
   hat = new Hat(width / 4, height / 1.7, 200, 140);
+  disk123 = new Disk(20, 60, 110, 50, 0);
+  diskimg = [disk1, disk2, disk3];
+
   x2 = 1000;
   disk1X = 500;
   disk1Y = 450;
@@ -48,6 +57,15 @@ function setup() {
   if (state === "start") {
     noLoop();
   }
+  buttonStart = createImg("image/startbutton.png");
+  buttonStart.position(350, 600);
+  buttonStart.style("display", "none");
+  buttonStart.mouseClicked(startGame);
+
+  buttonBake = createImg("image/bakeagain.png");
+  buttonBake.position(350, 600);
+  buttonBake.style("display", "none");
+  buttonBake.mouseClicked(startscreen);
 }
 
 function preload() {
@@ -65,21 +83,23 @@ function preload() {
   mjöl = loadImage("image/mjöl.png");
   mjölk = loadImage("image/mjölk.png");
   kanelstång = loadImage("image/kanelstång.png");
+  bake = loadImage("image/bakeagain.png");
 }
 
 function startscreen() {
-  image(img, 0, 0, 1500, 800);
+  image(img, 0, 0, 1500, 750);
   image(starttext, 0, height / 9);
-
-  let buttonStart = createImg("image/startbutton.png");
-  buttonStart.position(350, 600);
-  buttonStart.mouseClicked(game);
+  buttonStart.style("display", "block");
+  buttonBake.style("display", "none");
 }
 
-//  function startGame() {
-//    state = "game";
-//    loop();
-//  }
+function startGame() {
+  state = "game";
+  buttonStart.style("display", "none");
+  hat.x = 0;
+  hat.y = 50;
+  loop();
+}
 
 function imageButtonClicked() {
   alert("image button clicked");
@@ -136,14 +156,15 @@ function game() {
   if (kanelstångX <= -100) {
     kanelstångX = 1000;
   }
-  if (
-    diskCollision(hat, disk1X, disk1Y, disk1Width, disk1Height) ||
-    diskCollision(hat, disk2X, disk2Y, disk2Width, disk2Height) ||
-    diskCollision(hat, disk3X, disk3Y, 100, 200)
-  ) {
-    gameover();
-    noLoop();
-  }
+
+  // if (
+  //   diskCollision(hat, disk1X, disk1Y, disk1Width, disk1Height) ||
+  //   diskCollision(hat, disk2X, disk2Y, disk2Width, disk2Height) ||
+  //   diskCollision(hat, disk3X, disk3Y, 100, 200)
+  // ) {
+  //   gameover();
+  //   noLoop();
+  // }
 
   hat.display();
 
@@ -152,22 +173,23 @@ function game() {
   }
 }
 
-function diskCollision() {
-  if (
-    hat.x + hat.width >= disk1X &&
-    hat.x <= disk1X + disk1Width &&
-    hat.y + hat.height >= disk1Y &&
-    hat.y <= disk1Y + disk1Height
-  ) {
-    return true;
-  }
-  return false;
-}
+// function diskCollision() {
+//   if (
+//     hat.x + hat.width >= disk1X &&
+//     hat.x <= disk1X + disk1Width &&
+//     hat.y + hat.height >= disk1Y &&
+//     hat.y <= disk1Y + disk1Height
+//   ) {
+//     return true;
+//   }
+//   return false;
 
 function gameover() {
   state = "gameover";
+  buttonBake.style("display", "block");
   noLoop();
-  image(gameoverbackground, 0, 0);
+  // image(bakeagain, 0, height / 9);
+  image(gameoverbackground, 0, 0, 1000, 800);
   image(sadboy, width / 2 - sadboy.width / 2, height / 2 - sadboy.height / 2);
 }
 
@@ -181,7 +203,7 @@ function draw() {
     noLoop();
   } else if (state === "game") {
     game();
-    hat.display();
+    disk123.display();
   } else if (state === "gameover") {
     gameover();
   }
@@ -227,15 +249,16 @@ class Hat {
   }
 
   display() {
-    image(gamehat, this.x, this.y, this.width, this.height);
-    if (keyIsDown(38)) {
-      this.moveUp();
-    } else {
-      this.moveDown();
+    if (state === "game") {
+      image(gamehat, this.x, this.y, this.width, this.height);
+      if (keyIsDown(38)) {
+        this.moveUp();
+      } else {
+        this.moveDown();
+      }
+      this.y = constrain(this.y, 0, height - this.height);
     }
-    this.y = constrain(this.y, 0, height - this.height);
   }
-
   moveUp() {
     this.velocity -= 0.2;
     this.y += this.velocity;
@@ -252,3 +275,17 @@ class Hat {
 //   hat.y + hat.height >= disk2Y &&
 //   hat.y <= disk2Y + disk2Height
 //   )
+
+class Disk {
+  constructor(x, y, width, height, image) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.imageIndex = image;
+  }
+
+  display() {
+    image(diskimg[this.imageIndex], this.x, this.y, this.width, this.height);
+  }
+}
