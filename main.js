@@ -111,9 +111,23 @@ function imageButtonClicked() {
   alert("image button clicked");
 }
 
+function collisionDetection() {
+  for(let i = 0; i < disks.length; i++) {
+   const disk = disks[1];
+
+   if(hat.x > disk.x && hat.x < disk.x + disk.width &&
+    hat.y > disk.y && hat.y < disk.y + disk.height) {
+
+      gameover();
+      return;
+    }
+  }
+}
+
 function game() {
   background(0);
   loop();
+  collisionDetection();
 
   x = x - transitionSpeed;
   x2 = x2 - transitionSpeed;
@@ -184,11 +198,8 @@ function game() {
   }
 }
 // this next lines are from the website mdm web doc 
-function collisionDetection() {
-  for(let i = 0; i < disks.push; i++) {
-   
-  }
-}
+
+
 
 // function diskCollision() {
 //   if (
