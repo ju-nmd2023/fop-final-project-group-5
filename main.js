@@ -28,6 +28,7 @@ function setup() {
   //frameRate(60);
   hat = new Hat(width / 4, height / 1.7, 200, 140);
   disk123 = new Disk(20, 60, 110, 50, 0);
+
   diskimg = [disk1, disk2, disk3];
 
   x2 = 1000;
@@ -66,6 +67,10 @@ function setup() {
   buttonBake.position(350, 600);
   buttonBake.style("display", "none");
   buttonBake.mouseClicked(startscreen);
+
+  disks.push(new Disk(500, 450, 150, 100, diskimg));
+  disks.push(new Disk(800, 500, 150, 200, diskimg));
+  disks.push(new Disk(250, 400, 100, 200, diskimg));
 }
 
 function preload() {
@@ -165,6 +170,11 @@ function game() {
   //   gameover();
   //   noLoop();
   // }
+
+  for(let i = 0; i < disks.length; i++) {
+    disks[i].move();
+    disks[i].display();
+  }
 
   hat.display();
 
@@ -282,10 +292,26 @@ class Disk {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.imageIndex = image;
+    this.imageIndex = imageIndex;
   }
 
   display() {
-    image(diskimg[this.imageIndex], this.x, this.y, this.width, this.height);
+     image(diskimg[this.imageIndex], this.x, this.y, this.width, this.height);
+    //  image(diskimg[1], this.x, this.y, this.width, this.height);
+    //  image(diskimg[2], this.x, this.y, this.width, this.height);
+  
+}
+
+
+   moveUp() {
+     this.y += 5;
+ }
+
+  move() {
+    this.x -= transitionSpeed;
+    if (this.x <= -this.width) {
+      this.x = width;
+    }
   }
+
 }
