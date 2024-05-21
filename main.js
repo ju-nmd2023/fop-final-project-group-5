@@ -111,6 +111,7 @@ function imageButtonClicked() {
   alert("image button clicked");
 }
 
+// this next lines are from the website mdm web doc 
 function collisionDetection() {
   for(let i = 0; i < disks.length; i++) {
    const disk = disks[i];
@@ -141,24 +142,6 @@ function game() {
     x2 = 1000;
   }
 
-  // disk1X -= transitionSpeed;
-  // disk2X -= transitionSpeed;
-  // disk3X -= transitionSpeed;
-
-  // image(disk1, disk1X, disk1Y, disk1Width, disk1Height);
-  // image(disk2, disk2X, disk2Y, disk2Width, disk2Height);
-  // image(disk3, disk3X, disk3Y, 100, 200);
-
-  // if (disk1X <= -150) {
-  //   disk1X = 1000;
-  // }
-  // if (disk2X <= -150) {
-  //   disk2X = 1000;
-  // }
-  // if (disk3X <= -100) {
-  //   disk3X = 1000;
-  // }
-
   mjölX -= transitionSpeed;
   mjölkX -= transitionSpeed;
   kanelstångX -= transitionSpeed;
@@ -177,15 +160,6 @@ function game() {
     kanelstångX = 1000;
   }
 
-  // if (
-  //   diskCollision(hat, disk1X, disk1Y, disk1Width, disk1Height) ||
-  //   diskCollision(hat, disk2X, disk2Y, disk2Width, disk2Height) ||
-  //   diskCollision(hat, disk3X, disk3Y, 100, 200)
-  // ) {
-  //   gameover();
-  //   noLoop();
-  // }
-
   for(let i = 0; i < disks.length; i++) {
     disks[i].move();
     disks[i].display();
@@ -196,21 +170,13 @@ function game() {
   if (x <= -gameScreen.width) {
     x = 0;
   }
+
+  if(state === "gameover") {
+    noLoop();
+    gameover();
+  }
 }
-// this next lines are from the website mdm web doc 
 
-
-
-// function diskCollision() {
-//   if (
-//     hat.x + hat.width >= disk1X &&
-//     hat.x <= disk1X + disk1Width &&
-//     hat.y + hat.height >= disk1Y &&
-//     hat.y <= disk1Y + disk1Height
-//   ) {
-//     return true;
-//   }
-//   return false;
 
 function gameover() {
   state = "gameover";
@@ -231,41 +197,11 @@ function draw() {
     noLoop();
   } else if (state === "game") {
     game();
-    // disk123.display();
   } else if (state === "gameover") {
     gameover();
   }
 }
-//  } else if (state === "game") {
-//   game();
-//   hat.display();
-//  } else if (state === "gameover") {
-//   image(gameoverbackground, 0, 0);
-//   image(sadboy, width / 2 - sadboy.width / 2, height / 2 - sadboy.height / 2);
 
-//  fill(255);
-
-// if (gameIsRunning === true) {
-//    gamehat = gamehat + velocity;
-//    velocity = velocity + acceleration;
-//  }
-
-// if (state) {
-//   hatY = hatY + velocity;
-//   velocity = velocity + acceleration;
-// }
-
-//  if (gamehat > 120) {
-//    gameIsRunning = false;
-//   if (velocity <= 0.5) {
-//      state = "result";
-//    } else {
-//      gameover();
-//    }
-
-//  }
-
-//  }
 
 class Hat {
   constructor(x, y, width, height) {
@@ -298,11 +234,6 @@ class Hat {
   }
 }
 
-// if ( hat.x + hat.width >= disk2X &&
-//   hat.x <= disk2X + disk2Width &&
-//   hat.y + hat.height >= disk2Y &&
-//   hat.y <= disk2Y + disk2Height
-//   )
 
 class Disk {
   constructor(x, y, width, height, imageIndex) {
@@ -315,8 +246,6 @@ class Disk {
 
   display() {
      image(diskimg[this.imageIndex], this.x, this.y, this.width, this.height);
-    //  image(diskimg[1], this.x, this.y, this.width, this.height);
-    //  image(diskimg[2], this.x, this.y, this.width, this.height);
   
 }
 
