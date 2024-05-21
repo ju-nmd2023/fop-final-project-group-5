@@ -18,6 +18,7 @@ let kanelstångX, kanelstångY;
 let buttonStart;
 let buttonBake;
 let disk = [];
+let disks = [];
 let disk123;
 let diskimg;
 let disk1, disk2, disk3;
@@ -27,7 +28,7 @@ function setup() {
   stroke(255);
   //frameRate(60);
   hat = new Hat(width / 4, height / 1.7, 200, 140);
-  disk123 = new Disk(20, 60, 110, 50, 0);
+  // disk123 = new Disk(20, 60, 110, 50, 0);
 
   diskimg = [disk1, disk2, disk3];
 
@@ -68,9 +69,9 @@ function setup() {
   buttonBake.style("display", "none");
   buttonBake.mouseClicked(startscreen);
 
-  disks.push(new Disk(500, 450, 150, 100, diskimg));
-  disks.push(new Disk(800, 500, 150, 200, diskimg));
-  disks.push(new Disk(250, 400, 100, 200, diskimg));
+  disks.push(new Disk(500, 450, 150, 100, 0));
+  disks.push(new Disk(800, 500, 150, 200, 1));
+  disks.push(new Disk(250, 400, 100, 200, 2));
 }
 
 function preload() {
@@ -287,7 +288,7 @@ class Hat {
 //   )
 
 class Disk {
-  constructor(x, y, width, height, image) {
+  constructor(x, y, width, height, imageIndex) {
     this.x = x;
     this.y = y;
     this.width = width;
