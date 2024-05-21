@@ -6,7 +6,7 @@ let gameScreen2;
 let gameScreen3;
 let x = 0;
 let x2;
-let transitionSpeed = 1;
+let transitionSpeed = 3;
 const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
@@ -117,7 +117,7 @@ function collisionDetection() {
 
    if(hat.x > disk.x && hat.x < disk.x + disk.width &&
     hat.y > disk.y && hat.y < disk.y + disk.height) {
-console.log();
+console.log(hat.x, disk.x);
       gameover();
       return;
     }
@@ -326,7 +326,7 @@ class Disk {
  }
 
   move() {
-    this.x -= 2;
+    this.x -= 3;
     if (this.x <= -this.width) {
       this.x = width;
     }
