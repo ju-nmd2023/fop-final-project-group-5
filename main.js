@@ -11,9 +11,9 @@ const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
 let hat;
-let disk1X, disk1Y, disk2X, disk2Y, disk3X, disk3Y;
-let mjölX, mjölY;
-let mjölkX, mjölkY;
+// let disk1X, disk1Y, disk2X, disk2Y, disk3X, disk3Y;
+// let mjölX, mjölY;
+// let mjölkX, mjölkY;
 let kanelstångX, kanelstångY;
 let buttonStart;
 let buttonBake;
@@ -33,16 +33,16 @@ function setup() {
   diskimg = [disk1, disk2, disk3];
 
   x2 = 1000;
-  disk1X = 500;
-  disk1Y = 450;
-  disk1Width = 150;
-  disk1Height = 100;
-  disk2X = 800;
-  disk2Y = 500;
-  disk2Width = 150;
-  disk2Height = 200;
-  disk3X = 250;
-  disk3Y = 400;
+  // disk1X = 500;
+  // disk1Y = 450;
+  // disk1Width = 150;
+  // disk1Height = 100;
+  // disk2X = 800;
+  // disk2Y = 500;
+  // disk2Width = 150;
+  // disk2Height = 200;
+  // disk3X = 250;
+  // disk3Y = 400;
 
   mjölX = 200;
   mjölY = 400;
@@ -127,23 +127,23 @@ function game() {
     x2 = 1000;
   }
 
-  disk1X -= transitionSpeed;
-  disk2X -= transitionSpeed;
-  disk3X -= transitionSpeed;
+  // disk1X -= transitionSpeed;
+  // disk2X -= transitionSpeed;
+  // disk3X -= transitionSpeed;
 
-  image(disk1, disk1X, disk1Y, disk1Width, disk1Height);
-  image(disk2, disk2X, disk2Y, disk2Width, disk2Height);
-  image(disk3, disk3X, disk3Y, 100, 200);
+  // image(disk1, disk1X, disk1Y, disk1Width, disk1Height);
+  // image(disk2, disk2X, disk2Y, disk2Width, disk2Height);
+  // image(disk3, disk3X, disk3Y, 100, 200);
 
-  if (disk1X <= -150) {
-    disk1X = 1000;
-  }
-  if (disk2X <= -150) {
-    disk2X = 1000;
-  }
-  if (disk3X <= -100) {
-    disk3X = 1000;
-  }
+  // if (disk1X <= -150) {
+  //   disk1X = 1000;
+  // }
+  // if (disk2X <= -150) {
+  //   disk2X = 1000;
+  // }
+  // if (disk3X <= -100) {
+  //   disk3X = 1000;
+  // }
 
   mjölX -= transitionSpeed;
   mjölkX -= transitionSpeed;
@@ -214,7 +214,7 @@ function draw() {
     noLoop();
   } else if (state === "game") {
     game();
-    disk123.display();
+    // disk123.display();
   } else if (state === "gameover") {
     gameover();
   }
