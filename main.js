@@ -113,11 +113,11 @@ function imageButtonClicked() {
 
 function collisionDetection() {
   for(let i = 0; i < disks.length; i++) {
-   const disk = disks[1];
+   const disk = disks[i];
 
    if(hat.x > disk.x && hat.x < disk.x + disk.width &&
     hat.y > disk.y && hat.y < disk.y + disk.height) {
-
+console.log();
       gameover();
       return;
     }
@@ -326,7 +326,7 @@ class Disk {
  }
 
   move() {
-    this.x -= transitionSpeed;
+    this.x -= 2;
     if (this.x <= -this.width) {
       this.x = width;
     }
