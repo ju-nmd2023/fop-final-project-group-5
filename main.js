@@ -131,6 +131,7 @@ console.log(hat.x, disk.x);
 function collectCollectibles() {
   for(let i = 0; i < collectibles.length; i++) {
     const collectibles = collectibles[i];
+    
     if(hat.x < collectibles.x + collectibles.width &&
       hat.x + hat.width > collectibles.x &&
       hat.y < collectibles.y + collectibles.height &&
