@@ -11,9 +11,6 @@ const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
 let hat;
-// let disk1X, disk1Y, disk2X, disk2Y, disk3X, disk3Y;
-// let mjölX, mjölY;
-// let mjölkX, mjölkY;
 let kanelstångX, kanelstångY;
 let buttonStart;
 let buttonBake;
@@ -22,6 +19,10 @@ let disks = [];
 let disk123;
 let diskimg;
 let disk1, disk2, disk3;
+let collectibles = [];
+let mjöl, mjölk, kanelstång, smör, socker, ägg;
+let collectiblesimg;
+let collectible = [];
 
 function setup() {
   createCanvas(1000, 800);
@@ -31,18 +32,9 @@ function setup() {
   // disk123 = new Disk(20, 60, 110, 50, 0);
 
   diskimg = [disk1, disk2, disk3];
+  collectiblesimg = [mjöl, mjölk, kanelstång, smör, socker, ägg];
 
   x2 = 1000;
-  // disk1X = 500;
-  // disk1Y = 450;
-  // disk1Width = 150;
-  // disk1Height = 100;
-  // disk2X = 800;
-  // disk2Y = 500;
-  // disk2Width = 150;
-  // disk2Height = 200;
-  // disk3X = 250;
-  // disk3Y = 400;
 
   mjölX = 200;
   mjölY = 400;
@@ -72,6 +64,14 @@ function setup() {
   disks.push(new Disk(500, 450, 150, 100, 0));
   disks.push(new Disk(800, 500, 150, 200, 1));
   disks.push(new Disk(250, 400, 100, 200, 2));
+
+  collectibles.push(new Collectible(200, 400, 170, 140, mjöl));
+  collectibles.push(new Collectible(50, 450, 100, 160, mjölk));
+  collectibles.push(new Collectible(650, 430, 100, 120, kanelstång));
+  collectibles.push(new Collectible(470, 420, 120, 140, smör));
+  collectibles.push(new Collectible(270, 300, 150, 120, smör));
+  collectibles.push(new Collectible(550, 450, 150, 100, smör));
+
 }
 
 function preload() {
@@ -89,6 +89,9 @@ function preload() {
   mjöl = loadImage("image/mjöl.png");
   mjölk = loadImage("image/mjölk.png");
   kanelstång = loadImage("image/kanelstång.png");
+  smör = loadImage("image/smör.svg");
+  socker = loadImage("image/socker.svg");
+  ägg = loadImage("image/ägg.svg");
   bake = loadImage("image/bakeagain.png");
 }
 
@@ -125,10 +128,24 @@ console.log(hat.x, disk.x);
   }
 }
 
+function collectCollectibles() {
+  for(let i = 0; i < collectibles.length; i++) {
+    const collectibles = collectibles[i];
+    if(hat.x < collectibles.x + collectibles.width &&
+      hat.x + hat.width > collectibles.x &&
+      hat.y < collectibles.y + collectibles.height &&
+      hat.y + hat.height > collectibles.y) {
+
+        collectibles.splice(i, 1);
+      }
+  }
+}
+
 function game() {
   background(0);
   loop();
   collisionDetection();
+  collectCollectibles();
 
   x = x - transitionSpeed;
   x2 = x2 - transitionSpeed;
@@ -163,6 +180,11 @@ function game() {
   for(let i = 0; i < disks.length; i++) {
     disks[i].move();
     disks[i].display();
+  }
+
+  for(let i = 0; i < collectibles.length; i++) {
+    collectibles[i].move();
+    collectibles[i].display();
   }
 
   hat.display();
@@ -245,10 +267,8 @@ class Disk {
   }
 
   display() {
-     image(diskimg[this.imageIndex], this.x, this.y, this.width, this.height);
-  
+     image(diskimg[this.imageIndex], this.x, this.y, this.width, this.height); 
 }
-
 
    moveUp() {
      this.y += 5;
@@ -262,3 +282,29 @@ class Disk {
   }
 
 }
+
+class Collectible {
+  constructor(x, y, width, height, imageIndex) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.imageIndex = imageIndex;
+  }
+
+  display() {
+    image(collectiblesimg[this.imageIndex], this.x, this.y, this.width, this.height);
+  }
+
+  moveUp() {
+    this.y += 5;
+  }
+
+  move() {
+    this.x -= 3;
+    if (this.x <= -this.width) {
+      this.x = width;
+    }
+  }
+}
+
