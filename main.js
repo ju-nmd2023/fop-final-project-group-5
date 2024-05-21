@@ -183,6 +183,12 @@ function game() {
     x = 0;
   }
 }
+// this next lines are from the website mdm web doc 
+function collisionDetection() {
+  for(let i = 0; i < disks.push; i++) {
+   
+  }
+}
 
 // function diskCollision() {
 //   if (
