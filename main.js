@@ -1,6 +1,3 @@
-/*let image;
-let starttext;*/
-
 let gameScreen;
 let gameScreen2;
 let gameScreen3;
@@ -11,7 +8,6 @@ const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
 let hat;
-// let kanelstångX, kanelstångY;
 let buttonStart;
 let buttonBake;
 let disk = [];
@@ -27,9 +23,7 @@ let collectible = [];
 function setup() {
   createCanvas(1000, 800);
   stroke(255);
-  //frameRate(60);
   hat = new Hat(width / 4, height / 1.7, 200, 140);
-  // disk123 = new Disk(20, 60, 110, 50, 0);
 
   diskimg = [disk1, disk2, disk3];
   collectiblesimg = [mjöl, mjölk, kanelstång, smör, socker, ägg];
