@@ -1,3 +1,5 @@
+// we have checked the code with chatGPT for spellling errors and small mistakes https://chatgpt.com/share/fea50b6b-931a-4acb-af62-36efd55e49f9
+
 let gameScreen;
 let gameScreen2;
 let gameScreen3;
@@ -131,7 +133,7 @@ function imageButtonClicked() {
   alert("image button clicked");
 }
 
-// this next lines are from the website mdm web doc
+// lines 134 to 144 are from the website mdm web doc https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Collision_detection
 function collisionDetection() {
   for (let i = 0; i < disks.length; i++) {
     const disk = disks[i];
@@ -148,12 +150,12 @@ function collisionDetection() {
     }
   }
 }
-
+// lines 152 to 162 are from the website mdm web doc https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Collision_detection
 function collectCollectibles() {
   console.log(collectibles);
   for (let i = 0; i < collectibles.length; i++) {
     const collectible = collectibles[i];
-
+    // lines 157 to 162 are checked and changed by chatGPT https://chatgpt.com/share/fea50b6b-931a-4acb-af62-36efd55e49f9
     if (
       hat.x < collectible.x + collectible.width &&
       hat.x + hat.width > collectible.x &&
@@ -186,24 +188,6 @@ function game() {
   } else if (x2 <= -1000) {
     x2 = 1000;
   }
-
-  // mjölX -= transitionSpeed;
-  // mjölkX -= transitionSpeed;
-  // kanelstångX -= transitionSpeed;
-
-  // image(mjöl, mjölX, mjölY, 170, 140);
-  // image(mjölk, mjölkX, mjölkY, 100, 160);
-  // image(kanelstång, kanelstångX, kanelstångY, 100, 120);
-
-  // if (mjölX <= -150) {
-  //   mjölX = 1000;
-  // }
-  // if (mjölkX <= -150) {
-  //   mjölkX = 1000;
-  // }
-  // if (kanelstångX <= -100) {
-  //   kanelstångX = 1000;
-  // }
 
   for (let i = 0; i < disks.length; i++) {
     disks[i].move();
@@ -289,6 +273,7 @@ class Hat {
   }
 }
 
+//help by a friend with structuring the class.
 class Disk {
   constructor(x, y, width, height, imageIndex) {
     this.x = x;
