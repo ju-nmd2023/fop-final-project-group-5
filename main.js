@@ -144,6 +144,10 @@ function collectCollectibles() {
       hat.y + hat.height > collectible.y
     ) {
       collectibles.splice(i, 1);
+      if (collectibles.length === 0) {
+        state = "winning";
+      }
+      return;
     }
   }
 }
@@ -217,8 +221,9 @@ function gameover() {
 
 function winner() {
   state = "winning";
-  image(winner, 0, 0, 1000, 800);
+  image(winningscreeen, 0, 0, 1000, 800);
   noLoop();
+  buttonBake.style("display", "block");
 }
 
 function draw() {
