@@ -11,7 +11,7 @@ const acceleration = 0.1;
 let gameIsRunning = false;
 let state = "start";
 let hat;
-let kanelstångX, kanelstångY;
+// let kanelstångX, kanelstångY;
 let buttonStart;
 let buttonBake;
 let disk = [];
@@ -65,13 +65,12 @@ function setup() {
   disks.push(new Disk(800, 500, 150, 200, 1));
   disks.push(new Disk(250, 400, 100, 200, 2));
 
-  collectibles.push(new Collectible(200, 400, 170, 140, mjöl));
-  collectibles.push(new Collectible(50, 450, 100, 160, mjölk));
-  collectibles.push(new Collectible(650, 430, 100, 120, kanelstång));
-  collectibles.push(new Collectible(470, 420, 120, 140, smör));
-  collectibles.push(new Collectible(270, 300, 150, 120, smör));
-  collectibles.push(new Collectible(550, 450, 150, 100, smör));
-
+  collectibles.push(new Collectible(200, 400, 170, 140, 0));
+  collectibles.push(new Collectible(50, 450, 100, 160, 1));
+  collectibles.push(new Collectible(650, 430, 100, 120, 2));
+  collectibles.push(new Collectible(470, 420, 120, 140, 3));
+  collectibles.push(new Collectible(270, 300, 150, 120, 4));
+  collectibles.push(new Collectible(550, 450, 150, 100, 5));
 }
 
 function preload() {
@@ -93,6 +92,7 @@ function preload() {
   socker = loadImage("image/socker.svg");
   ägg = loadImage("image/ägg.svg");
   bake = loadImage("image/bakeagain.png");
+  winningscreeen = loadImage("image/winner.png");
 }
 
 function startscreen() {
@@ -114,14 +114,18 @@ function imageButtonClicked() {
   alert("image button clicked");
 }
 
-// this next lines are from the website mdm web doc 
+// this next lines are from the website mdm web doc
 function collisionDetection() {
-  for(let i = 0; i < disks.length; i++) {
-   const disk = disks[i];
+  for (let i = 0; i < disks.length; i++) {
+    const disk = disks[i];
 
-   if(hat.x > disk.x && hat.x < disk.x + disk.width &&
-    hat.y > disk.y && hat.y < disk.y + disk.height) {
-console.log(hat.x, disk.x);
+    if (
+      hat.x > disk.x &&
+      hat.x < disk.x + disk.width &&
+      hat.y > disk.y &&
+      hat.y < disk.y + disk.height
+    ) {
+      console.log(hat.x, disk.x);
       gameover();
       return;
     }
@@ -129,16 +133,18 @@ console.log(hat.x, disk.x);
 }
 
 function collectCollectibles() {
-  for(let i = 0; i < collectibles.length; i++) {
-    const collectibles = collectibles[i];
-    
-    if(hat.x < collectibles.x + collectibles.width &&
-      hat.x + hat.width > collectibles.x &&
-      hat.y < collectibles.y + collectibles.height &&
-      hat.y + hat.height > collectibles.y) {
+  console.log(collectibles);
+  for (let i = 0; i < collectibles.length; i++) {
+    const collectible = collectibles[i];
 
-        collectibles.splice(i, 1);
-      }
+    if (
+      hat.x < collectible.x + collectible.width &&
+      hat.x + hat.width > collectible.x &&
+      hat.y < collectible.y + collectible.height &&
+      hat.y + hat.height > collectible.y
+    ) {
+      collectibles.splice(i, 1);
+    }
   }
 }
 
@@ -160,30 +166,30 @@ function game() {
     x2 = 1000;
   }
 
-  mjölX -= transitionSpeed;
-  mjölkX -= transitionSpeed;
-  kanelstångX -= transitionSpeed;
+  // mjölX -= transitionSpeed;
+  // mjölkX -= transitionSpeed;
+  // kanelstångX -= transitionSpeed;
 
-  image(mjöl, mjölX, mjölY, 170, 140);
-  image(mjölk, mjölkX, mjölkY, 100, 160);
-  image(kanelstång, kanelstångX, kanelstångY, 100, 120);
+  // image(mjöl, mjölX, mjölY, 170, 140);
+  // image(mjölk, mjölkX, mjölkY, 100, 160);
+  // image(kanelstång, kanelstångX, kanelstångY, 100, 120);
 
-  if (mjölX <= -150) {
-    mjölX = 1000;
-  }
-  if (mjölkX <= -150) {
-    mjölkX = 1000;
-  }
-  if (kanelstångX <= -100) {
-    kanelstångX = 1000;
-  }
+  // if (mjölX <= -150) {
+  //   mjölX = 1000;
+  // }
+  // if (mjölkX <= -150) {
+  //   mjölkX = 1000;
+  // }
+  // if (kanelstångX <= -100) {
+  //   kanelstångX = 1000;
+  // }
 
-  for(let i = 0; i < disks.length; i++) {
+  for (let i = 0; i < disks.length; i++) {
     disks[i].move();
     disks[i].display();
   }
 
-  for(let i = 0; i < collectibles.length; i++) {
+  for (let i = 0; i < collectibles.length; i++) {
     collectibles[i].move();
     collectibles[i].display();
   }
@@ -194,12 +200,11 @@ function game() {
     x = 0;
   }
 
-  if(state === "gameover") {
+  if (state === "gameover") {
     noLoop();
     gameover();
   }
 }
-
 
 function gameover() {
   state = "gameover";
@@ -210,7 +215,11 @@ function gameover() {
   image(sadboy, width / 2 - sadboy.width / 2, height / 2 - sadboy.height / 2);
 }
 
-function winner() {}
+function winner() {
+  state = "winning";
+  image(winner, 0, 0, 1000, 800);
+  noLoop();
+}
 
 function draw() {
   clear();
@@ -222,9 +231,10 @@ function draw() {
     game();
   } else if (state === "gameover") {
     gameover();
+  } else if (state === "winning") {
+    winner();
   }
 }
-
 
 class Hat {
   constructor(x, y, width, height) {
@@ -257,7 +267,6 @@ class Hat {
   }
 }
 
-
 class Disk {
   constructor(x, y, width, height, imageIndex) {
     this.x = x;
@@ -268,33 +277,7 @@ class Disk {
   }
 
   display() {
-     image(diskimg[this.imageIndex], this.x, this.y, this.width, this.height); 
-}
-
-   moveUp() {
-     this.y += 5;
- }
-
-  move() {
-    this.x -= 3;
-    if (this.x <= -this.width) {
-      this.x = width;
-    }
-  }
-
-}
-
-class Collectible {
-  constructor(x, y, width, height, imageIndex) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.imageIndex = imageIndex;
-  }
-
-  display() {
-    image(collectiblesimg[this.imageIndex], this.x, this.y, this.width, this.height);
+    image(diskimg[this.imageIndex], this.x, this.y, this.width, this.height);
   }
 
   moveUp() {
@@ -309,3 +292,33 @@ class Collectible {
   }
 }
 
+class Collectible {
+  constructor(x, y, width, height, imageIndex) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.imageIndex = imageIndex;
+  }
+
+  display() {
+    image(
+      collectiblesimg[this.imageIndex],
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
+  }
+
+  moveUp() {
+    this.y += 5;
+  }
+
+  move() {
+    this.x -= 3;
+    if (this.x <= -this.width) {
+      this.x = width;
+    }
+  }
+}
