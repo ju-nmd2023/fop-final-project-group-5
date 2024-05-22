@@ -100,6 +100,29 @@ function startscreen() {
   image(starttext, 0, height / 9);
   buttonStart.style("display", "block");
   buttonBake.style("display", "none");
+
+  x = 0;
+  x2 = 1000;
+  collectibles = [];
+  disks = [];
+
+  collectibles.push(new Collectible(200, 400, 170, 140, 0));
+  collectibles.push(new Collectible(50, 450, 100, 160, 1));
+  collectibles.push(new Collectible(650, 430, 100, 120, 2));
+  collectibles.push(new Collectible(470, 420, 120, 140, 3));
+  collectibles.push(new Collectible(270, 300, 150, 120, 4));
+  collectibles.push(new Collectible(550, 450, 150, 100, 5));
+
+  disks.push(new Disk(500, 450, 150, 100, 0));
+  disks.push(new Disk(800, 500, 150, 200, 1));
+  disks.push(new Disk(250, 400, 100, 200, 2));
+
+  state = "start";
+  buttonBake.style("display", "none");
+  buttonStart.style("display", "block");
+
+  image(img, 0, 0, 1500, 750);
+  image(starttext, 0, height / 9);
 }
 
 function startGame() {
